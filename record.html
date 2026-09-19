@@ -1,0 +1,166 @@
+<!doctype html>
+<!--
+  RECORDING RIG (not shipped — not a Vite build input).
+  Vertical Short: the live Gun Game fills the top ~70% under a browser bar; the
+  bottom ~30% holds two code cards, index.html + style.css. The rig calls the
+  page's ?record self-play (window.gungame): the range plays itself while the rig
+  climbs the whole weapon ladder — pistol → dual → SMG → shotgun → rifle → sniper
+  → LMG → gold → knife → WIN. Captured 540×960 @2x → 1080×1920.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gun Game — recording rig</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ width:540px; height:960px; overflow:hidden; }
+  body{ position:relative; font-family:"Inter",system-ui,sans-serif; color:#dfe9f6; background:#05060b; }
+
+  /* ---- top ~70%: live game under a browser bar ---- */
+  .device{ position:absolute; top:0; left:0; width:540px; height:672px; overflow:hidden; background:#05060b; }
+  .device__bar{
+    height:34px; display:flex; align-items:center; gap:7px;
+    padding:0 14px; background:#0b0e16; border-bottom:1px solid rgba(34,224,255,.14);
+  }
+  .device__bar i{ width:11px; height:11px; border-radius:50%; }
+  .device__bar i:nth-child(1){ background:#ff5f57; }
+  .device__bar i:nth-child(2){ background:#febc2e; }
+  .device__bar i:nth-child(3){ background:#28c840; }
+  .device__title{ margin-left:8px; font-size:12.5px; font-weight:600; white-space:nowrap; color:#cfe0f0; }
+  .device__title b{
+    font-family:"Space Grotesk",sans-serif; font-weight:700; letter-spacing:.06em;
+    background:linear-gradient(92deg,#22e0ff,#ff2d95); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .device__url{
+    margin-left:auto; font-family:"JetBrains Mono",monospace; font-size:10px;
+    color:#6f93a8; background:#0a1018; padding:3px 10px; border-radius:7px; white-space:nowrap;
+  }
+  .device iframe{ display:block; width:100%; height:calc(100% - 34px); border:0; background:#05060b; }
+
+  /* ---- bottom ~30%: two code cards, index.html + style.css (midnight editor) ---- */
+  .code{
+    position:absolute; left:0; top:672px; width:540px; height:288px;
+    display:flex; gap:12px; padding:14px;
+    background:linear-gradient(180deg,#0a0e17 0%, #06070d 100%);
+    border-top:1px solid rgba(34,224,255,.14);
+  }
+  .card{
+    flex:1; min-width:0; display:flex; flex-direction:column;
+    background:#0b1018; border:1px solid rgba(34,224,255,.16);
+    border-radius:12px; overflow:hidden;
+    box-shadow:0 16px 34px -18px rgba(0,0,0,.85), inset 0 1px 0 rgba(34,224,255,.06);
+  }
+  .card__bar{
+    display:flex; align-items:center; gap:7px;
+    padding:8px 11px; border-bottom:1px solid rgba(34,224,255,.10);
+    font-family:"JetBrains Mono",monospace; font-size:11px; font-weight:600; letter-spacing:.03em;
+  }
+  .card__dot{ width:9px; height:9px; border-radius:3px; }
+  .card--html .card__dot{ background:#22e0ff; }
+  .card--css  .card__dot{ background:#ff2d95; }
+  .card--html .card__bar b{ color:#7cf0ff; }
+  .card--css  .card__bar b{ color:#ff8ac2; }
+  .card__bar span{ margin-left:auto; color:#5f7488; font-size:10px; }
+  pre{
+    flex:1; padding:10px 12px; overflow:hidden;
+    font-family:"JetBrains Mono",monospace; font-size:9.6px; line-height:1.72;
+    color:#c3d3e2; white-space:pre;
+  }
+  .c{ color:#5f7488; font-style:italic; }   /* comment  */
+  .t{ color:#4fd8ff; }                       /* tag / selector */
+  .a{ color:#9fe4ff; }                       /* attribute / property */
+  .s{ color:#ffb020; }                       /* string   */
+  .p{ color:#7f93a6; }                       /* punctuation */
+  .k{ color:#ff5fa2; }                       /* keyword / at-rule */
+  .n{ color:#ff8a5a; }                       /* number   */
+</style>
+</head>
+<body>
+  <div class="device">
+    <div class="device__bar">
+      <i></i><i></i><i></i>
+      <span class="device__title"><b>GUN&nbsp;GAME</b></span>
+      <span class="device__url">localhost / gun-game</span>
+    </div>
+    <iframe id="app" src="/projects/35-gungame/?record" title="Gun Game — hit to level up"></iframe>
+  </div>
+
+  <div class="code">
+    <div class="card card--html">
+      <div class="card__bar"><span class="card__dot"></span><b>index.html</b><span>markup</span></div>
+<pre><span class="c">&lt;!-- your cursor is the crosshair --&gt;</span>
+<span class="t">&lt;canvas</span> <span class="a">id</span>=<span class="s">"c"</span><span class="t">&gt;&lt;/canvas&gt;</span>
+<span class="t">&lt;div</span> <span class="a">class</span>=<span class="s">"hit"</span> <span class="a">id</span>=<span class="s">"hit"</span>
+     <span class="a">role</span>=<span class="s">"button"</span><span class="t">&gt;&lt;/div&gt;</span>
+
+<span class="t">&lt;div</span> <span class="a">class</span>=<span class="s">"weapon"</span><span class="t">&gt;</span>
+  <span class="t">&lt;span</span> <span class="a">class</span>=<span class="s">"weapon__name"</span><span class="t">&gt;</span>PISTOL<span class="t">&lt;/span&gt;</span>
+  <span class="t">&lt;div</span> <span class="a">class</span>=<span class="s">"weapon__pips"</span><span class="t">&gt;&lt;/div&gt;</span>
+  <span class="t">&lt;span</span> <span class="a">class</span>=<span class="s">"weapon__ammo"</span><span class="t">&gt;</span>7<span class="t">&lt;/span&gt;</span>
+<span class="t">&lt;/div&gt;</span></pre>
+    </div>
+
+    <div class="card card--css">
+      <div class="card__bar"><span class="card__dot"></span><b>style.css</b><span>one accent</span></div>
+<pre><span class="c">/* one accent recolours the whole HUD */</span>
+<span class="t">:root</span> <span class="p">{</span> <span class="a">--acc</span><span class="p">:</span> <span class="n">#22e0ff</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="t">.weapon__lvl</span> <span class="p">{</span>
+  <span class="a">color</span><span class="p">:</span> <span class="k">var</span>(<span class="a">--acc</span>)<span class="p">;</span>
+  <span class="a">text-shadow</span><span class="p">:</span> <span class="n">0 0 16px</span> <span class="k">var</span>(<span class="a">--acc</span>)<span class="p">;</span>
+<span class="p">}</span>
+<span class="t">.pips span.on</span> <span class="p">{</span>
+  <span class="a">background</span><span class="p">:</span> <span class="k">var</span>(<span class="a">--acc</span>)<span class="p">;</span>
+  <span class="a">box-shadow</span><span class="p">:</span> <span class="n">0 0 10px</span> <span class="k">var</span>(<span class="a">--acc</span>)<span class="p">;</span>
+<span class="p">}</span></pre>
+    </div>
+  </div>
+
+<script>
+  const iframe = document.getElementById('app');
+  const api = () => iframe.contentWindow.gungame;
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  window.__ready = false;
+  window.__done  = false;
+  window.__t0    = 0;
+  window.__marks = {};
+
+  async function run(){
+    window.__t0 = performance.now();
+    const g = api();
+    g.autolevel(false);          // one gun the whole clip — no weapon changes
+    g.start();
+    await sleep(9600);           // just shoot the range; combo + score climb naturally
+    g.finish();
+    window.__done = true;
+  }
+  window.startShow = run;
+
+  function injectHide(){
+    // video-only: hide the level-up banner + the weapon (LVL/pips/ammo) panel.
+    // The live game keeps them — this only affects the recording. Win banner (.banner.win) stays.
+    try {
+      const d = iframe.contentDocument;
+      if (d.getElementById('rigHide')) return;
+      const s = d.createElement('style'); s.id = 'rigHide';
+      s.textContent = '.weapon{display:none!important}.banner:not(.win){display:none!important}';
+      d.head.appendChild(s);
+    } catch (_) {}
+  }
+  function boot(){
+    if (window.__ready) return;
+    try {
+      if (iframe.contentWindow && iframe.contentWindow.gungame){ injectHide(); window.__ready = true; return; }
+    } catch (_) {}
+    setTimeout(boot, 100);
+  }
+  iframe.addEventListener('load', () => setTimeout(boot, 200));
+  setTimeout(boot, 400);
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gun Game — hit to level up</title>
+  <meta name="description" content="A neon shooting range where your cursor is the crosshair. Click to fire — muzzle flash, recoil, tracers, flying shells — and pick off the glowing targets to build your combo streak." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <button class="mute" id="mute" aria-pressed="false" aria-label="Sound off">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9v6h4l5 4V5L8 9H4z"/><path class="wave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8 8 0 0 1 0 12"/></svg>
+  </button>
+
+  <main class="stage">
+    <canvas id="c"></canvas>
+
+    <!-- Full-stage hit-target: owns the pointer, focus ring and keyboard access. -->
+    <div class="hit" id="hit" tabindex="0" role="button"
+         aria-label="Shooting range. Move to aim your crosshair, click or press Space to fire at the glowing targets and build your combo streak."></div>
+
+    <!-- top HUD -->
+    <div class="hud" aria-hidden="true">
+      <div class="hud__score">SCORE <b id="score">0</b></div>
+      <div class="hud__acc">ACC <b id="acc">100%</b></div>
+    </div>
+    <div class="combo" id="combo" aria-hidden="true"><span id="comboMult">x1</span><i id="comboLabel">COMBO</i></div>
+
+    <!-- weapon panel -->
+    <div class="weapon" id="weaponPanel" aria-hidden="true">
+      <div class="weapon__top">
+        <span class="weapon__lvl" id="wlvl">1/9</span>
+        <span class="weapon__name" id="wname">PISTOL</span>
+      </div>
+      <div class="weapon__pips" id="wpips"></div>
+      <div class="weapon__ammo"><span id="wammo">7</span><i>/<span id="wmag">7</span></i></div>
+    </div>
+
+    <!-- level-up / win banner -->
+    <div class="banner" id="banner" aria-hidden="true"></div>
+
+    <h1 class="wordmark" id="wordmark" aria-hidden="true">
+      <span class="wordmark__word" id="word">GUN&nbsp;GAME</span>
+      <span class="wordmark__sub">NEON SHOOTING RANGE</span>
+    </h1>
+
+    <p class="hint" id="hint"><span class="hint__grip"></span>aim · click to shoot · keep your streak</p>
+  </main>
+
+  <script type="module" src="./script.js"></script>
+</body>
+</html>
