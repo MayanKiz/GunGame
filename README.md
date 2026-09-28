@@ -1,59 +1,95 @@
-# Gungame
+# Gun Game
 
-## Description
+A fast-paced neon shooting range game built with vanilla HTML, CSS, and JavaScript. The player aims with the mouse, fires at moving targets, climbs through a weapon ladder, and builds combo streaks to maximize score.
 
-This repository contains a maintainable implementation with a focused user interface and a clear development workflow.
+## Overview
+
+Gun Game is a browser-based arcade challenge where every hit advances your loadout and every miss can break your combo. The game uses a single canvas rendering approach, responsive HUD elements, audio feedback, and a progression system inspired by classic gun-game mechanics.
+
+## Features
+
+- Mouse-based aiming and click-to-shoot mechanics
+- Progressive weapon ladder: pistol → dual pistols → SMG → shotgun → rifle → sniper → LMG → gold gun → knife
+- Combo multiplier system for streak-based scoring
+- Animated tracer shots, muzzle flashes, recoil, and projectile effects
+- Responsive UI with score, accuracy, ammo, and level tracking
+- Sound toggle and keyboard accessibility controls
+- No external build tools or dependencies required
 
 ## Tech Stack
 
-HTML / CSS / JavaScript
+- HTML
+- CSS
+- JavaScript
+- Canvas 2D rendering
 
-## Key Features
+## Project Structure
 
-- Core application workflow.
-- Responsive user interface.
-- Reusable project components.
+```text
+GunGame/
+├── index.html
+├── record.html
+├── style.css
+├── script.js
+├── README.md
+└── .gitignore
+```
 
 ## How to Run
 
-### Prerequisites
+### Option 1: Open directly in the browser
 
-Install the runtime and package manager required by the technology stack above. If the project uses environment variables, create a local `.env` file from the available example configuration and keep secrets out of version control.
-
-### Installation
+1. Clone the repository:
 
 ```bash
-# Clone the repository
-git clone <repository-url>
+git clone https://github.com/MayanKiz/GunGame.git
 cd GunGame
-
-# Install dependencies when package.json is present
-npm install
 ```
 
-For Python projects, install dependencies with `pip install -r requirements.txt` when that file is present. For C or C++ projects, use the compiler and build instructions appropriate to the source files.
+2. Open `index.html` in your browser.
 
-### Start the application
+### Option 2: Run a local web server
+
+If you want a cleaner local setup, serve the project folder from a static web server:
 
 ```bash
-npm run dev
+cd GunGame
+python -m http.server 8000
 ```
 
-Use the project-specific entry point when the repository does not define an `npm run dev` script. Common alternatives include `npm start`, `python <entry-file>.py`, or opening the static `index.html` file in a browser.
+Then open:
 
-## Project Status
+```text
+http://localhost:8000
+```
 
-This repository is maintained as a professional development project.
+## Controls
 
-## Contact and Collaboration
+- Move mouse to aim
+- Left click or Space to fire
+- R to reload
+- Arrow keys to nudge the aiming reticle
+- Mute button in the top corner to toggle sound
 
-For questions, collaboration, technical discussion, or project-related inquiries, use any of the following professional contact channels:
+## Gameplay
 
-- **Instagram:** [@rao.mynkk](https://www.instagram.com/rao.mynkk/)
-- **Email:** [rao.mynkk@gmail.com](mailto:rao.mynkk@gmail.com)
-- **WhatsApp:** [+24106603434](https://wa.me/24106603434)
-- **LinkedIn:** [Mayank Yadav](https://www.linkedin.com/in/mayank-yadav-2803202a5?utm_source=share_via&utm_content=profile&utm_medium=member_android)
+The goal is to eliminate targets, maintain your combo streak, and clear the full weapon ladder. As your accuracy and streak improve, your score climbs faster.
 
-Questions and collaboration requests are welcome. Please use the channel that best matches the nature of your inquiry.
+The game includes a win state once you finish the final weapon progression and a reset cycle for replayability.
 
-> **Project watermark:** Mayank Yadav · @rao.mynkk
+## Notes
+
+This project is intentionally lightweight and runs in the browser without a package manager or build step. It is suitable for quick prototyping, local game demos, and further expansion into additional game modes or polish.
+
+## License
+
+This project does not currently include a formal license file. If you plan to distribute or reuse it publicly, you may want to add an appropriate open-source license.
+
+## Contact
+
+For questions, collaboration, or project discussions:
+
+- Instagram: [@rao.mynkk](https://www.instagram.com/rao.mynkk/)
+- Email: [rao.mynkk@gmail.com](mailto:rao.mynkk@gmail.com)
+- WhatsApp: [+24106603434](https://wa.me/24106603434)
+- LinkedIn: [Mayank Yadav](https://www.linkedin.com/in/mayank-yadav-2803202a5)
