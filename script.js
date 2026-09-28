@@ -288,7 +288,7 @@ function ejectShell(w){
   if(w.melee) return;
   const side={x:-dir.y,y:dir.x};
   shells.push({x:muzzle.x-dir.x*w.len*GS*0.4, y:muzzle.y-dir.y*w.len*GS*0.4,
-    "Sample Message",
+    vx:side.x*rand(60,120)+rand(-20,20), vy:side.y*rand(40,90)-rand(80,160),
     rot:rand(TAU), vr:rand(-14,14), age:0, col:w.shape==='gold'?'#ffd54a':'#caa24a'});
 }
 function spawnDebris(t){
